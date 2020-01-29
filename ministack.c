@@ -1,11 +1,12 @@
 #include "ministack.h"
 
 /*
+** is a stack of positive-valued ints
 ** self-destructs when out of memory
-** call stack(positive_value) to push
-** call stack(negative_value) to destroy
-** call stack(0) to return the top without change
-** otherwise returns top of the stack
+** call with a positive value) to push it
+** call with any negative value to free the stack
+** call with 0 to peek
+** returns top of the stack
 */
 t_stack *stack(int v) {
 	static t_stack *base = NULL;
@@ -27,4 +28,18 @@ t_stack *stack(int v) {
 		}
 	}
 	return base;
+}
+
+/*
+** ministack additionally behaves as a set
+*/
+t_stack *setstack(int k) {
+	t_stack *top = stack(0);
+
+	while(top)
+		if (top->val == k)
+			return stack(0);
+		else
+			top = top->next;
+	return stack(k);
 }

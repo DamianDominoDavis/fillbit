@@ -1,3 +1,7 @@
+/*
+** translate a tetris piece into its upper-leftmost position
+** reads: shift up, identify vertical or horizontal pieces, shift left
+*/
 int settle(int k) {
 	int 				i;
 	int					hold;
@@ -21,6 +25,9 @@ int settle(int k) {
 	return k;
 }
 
+/*
+** to be a tetris piece, it's gotta be exactly four "contiguous" bits
+*/
 int	ispattern(char *p) {
 	int	x, c, h;
 

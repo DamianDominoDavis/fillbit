@@ -1,35 +1,26 @@
 #include "ministack.h"
 #include "perm.h"
 
+/*
+** print sixteen bits as a square visual
+*/
 static void tostring(int piece) {
 	static char	buf[17] = {0};
 	static int	mask = 1;
 
 	for (int i=0; i<16; i++)
 		buf[i] = (piece & (mask << i)) ? '#' : '.';
-	// for (int i=0; i<4; i++)
-	// 	printf("%.4s\n", &buf[4*i]);
+	for (int i=0; i<4; i++)
+		printf("%.4s\n", &buf[4*i]);
 	printf("%d\n", piece);
 }
 
-static t_stack *setstack(int k) {
-	t_stack *top = stack(0);
-
-	while(top)
-		if (top->val == k)
-			return stack(0);
-		else
-			top = top->next;
-	return stack(k);
-}
-
 /*
-** driver bruteforces over all possible pieces, filters on validity, twiddles
+** driver bruteforces over all possible bit grids, filters on validity, twiddles
 ** survivors into the normalized set
 */
 int main(void) {
-	char *buf = (char*)malloc(sizeof(char)*17);
-	buf[16] = 0;
+	char buf[17] = {0};
 	int bytes;
 	t_stack *set;
 
@@ -52,6 +43,5 @@ int main(void) {
 				}
 	do tostring(set->val); while ((set = set->next));
 	stack(-1);
-	free(buf);
 	return 0;
 }

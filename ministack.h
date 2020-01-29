@@ -9,5 +9,6 @@ typedef struct s_stack {
 } t_stack;
 
 t_stack	*stack(int v);
+t_stack *setstack(int k);
 
 #endif
